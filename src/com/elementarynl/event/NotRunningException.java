@@ -24,34 +24,22 @@
  *
  */
 
-import com.elementarynl.event.ElementaryListener;
-import com.elementarynl.event.OutcomeState;
-import com.elementarynl.network.ElementaryClient;
-import com.elementarynl.network.ElementaryServer;
-import com.elementarynl.network.worker.NetworkWorker;
+package com.elementarynl.event;
 
-import java.net.DatagramPacket;
-import java.net.InetSocketAddress;
+public class NotRunningException extends RuntimeException {
+    public NotRunningException () {
 
-public class Main {
+    }
 
+    public NotRunningException (String message) {
+        super (message);
+    }
 
-    public static void main(String [] args) {
+    public NotRunningException (Throwable cause) {
+        super (cause);
+    }
 
-        ElementaryListener listener = new ElementaryListener() {
-            @Override
-            public synchronized void onReceive(NetworkWorker worker, DatagramPacket packet) {
-            }
-        };
-
-        ElementaryClient client = new ElementaryClient(21926, listener);
-        ElementaryServer server = new ElementaryServer(21925, listener);
-
-        client.connect(server.getSocketAddress());
-        client.send("Hello", server.getSocketAddress());
-
-
-
-
+    public NotRunningException (String message, Throwable cause) {
+        super (message, cause);
     }
 }

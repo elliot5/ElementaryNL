@@ -24,34 +24,15 @@
  *
  */
 
-import com.elementarynl.event.ElementaryListener;
-import com.elementarynl.event.OutcomeState;
-import com.elementarynl.network.ElementaryClient;
-import com.elementarynl.network.ElementaryServer;
+package com.elementarynl.event;
+
 import com.elementarynl.network.worker.NetworkWorker;
 
 import java.net.DatagramPacket;
-import java.net.InetSocketAddress;
 
-public class Main {
-
-
-    public static void main(String [] args) {
-
-        ElementaryListener listener = new ElementaryListener() {
-            @Override
-            public synchronized void onReceive(NetworkWorker worker, DatagramPacket packet) {
-            }
-        };
-
-        ElementaryClient client = new ElementaryClient(21926, listener);
-        ElementaryServer server = new ElementaryServer(21925, listener);
-
-        client.connect(server.getSocketAddress());
-        client.send("Hello", server.getSocketAddress());
-
-
-
-
-    }
+public class ElementaryListener {
+    public synchronized void onReceive(final NetworkWorker worker, final DatagramPacket packet) {}
+    public synchronized void onSent(final NetworkWorker worker, final OutcomeState state) {}
+    public synchronized void onBind(final NetworkWorker worker, final OutcomeState state) {}
+    public synchronized void onConnect(final NetworkWorker worker, final OutcomeState state) {}
 }
